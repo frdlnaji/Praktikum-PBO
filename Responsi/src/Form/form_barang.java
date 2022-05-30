@@ -6,6 +6,7 @@ package Form;
 import Konfigurasi.Koneksi;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -45,6 +46,8 @@ public class form_barang extends javax.swing.JFrame {
         edit = new javax.swing.JButton();
         lihat = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
+        ID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +92,9 @@ public class form_barang extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BarangMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BarangMouseEntered(evt);
+            }
         });
         jScrollPane1.setViewportView(Barang);
 
@@ -120,6 +126,14 @@ public class form_barang extends javax.swing.JFrame {
             }
         });
 
+        id.setText("ID");
+
+        ID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,13 +144,15 @@ public class form_barang extends javax.swing.JFrame {
                         .addGap(152, 152, 152)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(129, 129, 129)
+                            .addComponent(id)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(147, 147, 147)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Massa, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -151,34 +167,46 @@ public class form_barang extends javax.swing.JFrame {
                         .addGap(295, 295, 295)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                        .addGap(75, 75, 75)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(input)
-                    .addComponent(hapus))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(input)
+                            .addComponent(hapus))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(edit)
+                            .addComponent(lihat))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(id)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
                     .addComponent(Massa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edit)
-                    .addComponent(lihat))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
         pack();
@@ -200,11 +228,12 @@ public class form_barang extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Connection conn = Koneksi.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("update barang set nama=?, massa=?, harga=?,  where id=?");
+            java.sql.PreparedStatement stmt = conn.prepareStatement("update barang set nama=?, massa=?, harga=? where id='" + ID.getText() + "'");
+            
+            
             stmt.setString(1, Nama.getText());
             stmt.setString(2, Massa.getText());
             stmt.setString(3, Harga.getText());
-            
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             TampilData();
@@ -225,10 +254,11 @@ public class form_barang extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data tersebut?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirm == 0) {
             try {
-                java.sql.PreparedStatement stmt = conn.prepareStatement("delete from barang where nama ='" + Nama.getText() + "'");
+                java.sql.PreparedStatement stmt = conn.prepareStatement("delete from barang where id ='" + ID.getText() + "'");
                 stmt.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Data berhasil dihapus", "Pesan", JOptionPane.INFORMATION_MESSAGE);
                 TampilData();
+                ID.setText("");
                 Nama.setText("");
                 Massa.setText("");
                 Harga.setText("");
@@ -240,10 +270,13 @@ public class form_barang extends javax.swing.JFrame {
 
     private void BarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangMouseClicked
         // TODO add your handling code here:
-int baris = jTable_barang.getSelectedRow();
-Nama.setText(DftTblModel_barang.getValueAt(baris, 0).toString());
-Harga.setText(DftTblModel_barang.getValueAt(baris, 1).toString());
+int baris = Barang.getSelectedRow();
+ID.setText(DftTblModel_barang.getValueAt(baris,0).toString());
+Nama.setText(DftTblModel_barang.getValueAt(baris, 1).toString());
 Massa.setText(DftTblModel_barang.getValueAt(baris, 2).toString());
+Harga.setText(DftTblModel_barang.getValueAt(baris, 3).toString());
+
+
 
     }//GEN-LAST:event_BarangMouseClicked
 
@@ -251,11 +284,10 @@ Massa.setText(DftTblModel_barang.getValueAt(baris, 2).toString());
         // TODO add your handling code here:
         try {
             Connection conn = Koneksi.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("insert into barang(nama, massa, harga ) values(?,?,? )");
+            java.sql.PreparedStatement stmt = conn.prepareStatement("insert into barang(nama, massa, harga ) values(?,?,? )");
             stmt.setString(1, Nama.getText());
             stmt.setString(2, Massa.getText());
             stmt.setString(3, Harga.getText());
-            
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data berhasil disimpan", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             TampilData();
@@ -263,6 +295,14 @@ Massa.setText(DftTblModel_barang.getValueAt(baris, 2).toString());
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_inputActionPerformed
+
+    private void BarangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BarangMouseEntered
+
+    private void IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,10 +342,12 @@ Massa.setText(DftTblModel_barang.getValueAt(baris, 2).toString());
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Barang;
     private javax.swing.JTextField Harga;
+    private javax.swing.JTextField ID;
     private javax.swing.JTextField Massa;
     private javax.swing.JTextField Nama;
     private javax.swing.JButton edit;
     private javax.swing.JButton hapus;
+    private javax.swing.JLabel id;
     private javax.swing.JButton input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -342,6 +384,10 @@ private String SQL;
             System.out.println(e.getMessage());
         }
     }
+
+   
+        
     }
+   
 
 
